@@ -17,6 +17,7 @@ class CaptureViewModel {
     var isCameraActive: Bool = false
     var isShazamActive: Bool = false
     var isKeepRecordingActive: Bool = false
+    var isSaving: Bool = false
 
     // Captured Data
     var capturedImage: Data?
@@ -81,6 +82,9 @@ class CaptureViewModel {
 
     @MainActor
     func saveSession(context: ModelContext) async {
+        isSaving = true
+        defer { isSaving = false }
+
         // Create the session
         let session = CaptureSession(
             timestamp: Date(),

@@ -113,11 +113,18 @@ struct CaptureView: View {
                                     dismiss()
                                 }
                             }) {
-                                Text("Save")
-                                    .bold()
-                                    .frame(minWidth: 80)
+                                if viewModel.isSaving {
+                                    ProgressView()
+                                        .controlSize(.small)
+                                        .frame(minWidth: 80)
+                                } else {
+                                    Text("Save")
+                                        .bold()
+                                        .frame(minWidth: 80)
+                                }
                             }
                             .buttonStyle(.borderedProminent)
+                            .disabled(viewModel.isSaving)
                         }
                         .padding()
                     }
